@@ -12,12 +12,13 @@
 #include <memory>
 #include <thread>
 #include <modal_pipe.h>
+#include "ai_detection.h"
 
 using namespace mavsdk;
 using std::chrono::seconds;
 using std::this_thread::sleep_for;
 
-static const string kProcessName = "voxl-tracking";
+static const std::string kProcessName = "voxl-tracking";
 
 void usage(const std::string& bin_name)
 {
@@ -61,7 +62,7 @@ void setup_pipe() {
     if (pipe_client_open(ch, input_pipe.c_str(), kProcessName.c_str(), EN_PIPE_CLIENT_SIMPLE_HELPER, 10 * sizeof(ai_detection_t)))
     {
         fprintf(stderr, "Failed to open pipe: %s\n", input_pipe.c_str());
-        return -1;
+        return;
     }
 }
 
